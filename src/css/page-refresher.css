@@ -1,0 +1,73 @@
+.page-refresher-wrapper {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  font-size: 0;
+  background-color: #fff;
+}
+.page-refresher-wrapper label {
+  display: inline-block;
+  user-select: none;
+  transition: background-color .4s ease;
+}
+.page-refresher-wrapper label:hover {
+  cursor: pointer;
+}
+.page-refresher-wrapper label > input {
+  display: none;
+}
+.page-refresher-wrapper label i {
+  display: inline-block;
+  padding: 2px;
+  width: 40px;
+  height: 20px;
+  border-radius: 13px;
+  vertical-align: middle;
+  transition: .25s .09s ease;
+  position: relative;
+  background-color: #d8d9db;
+  box-sizing: initial;
+  transition: background-color .4s ease;
+}
+.page-refresher-wrapper label i:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  left: 2px;
+  transition: .4s ease;
+}
+.page-refresher-wrapper label > input:checked + i {
+  background-color: #4bd865;
+}
+.page-refresher-wrapper label > input:checked + i:after {
+  transform: translateX(20px);
+}
+.page-refresher-wrapper > input {
+  margin-left: 5px;
+  padding: 6px 8px;
+  width: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  font-size: 14px;
+  color: #24292e;
+  vertical-align: middle;
+  background-color: #fff;
+  outline: none;
+  transition: width .4s ease;
+}
+.page-refresher-wrapper.turn-on > input {
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 0;
+  border: none;
+}
+
+/*# sourceMappingURL=page-refresher.css.map */
