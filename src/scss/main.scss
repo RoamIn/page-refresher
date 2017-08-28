@@ -1,14 +1,21 @@
-.page-refresher-wrapper {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    padding: 10px 15px;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
-    font-size: 0;
-    background-color: #fff;
+$outer-height: 36px;
+$inner-height: 20px;
 
-    label {
+.page-refresher-wrapper {
+    display: block !important;
+    position: fixed;
+    right: 30px;
+    bottom: 25px;
+    padding: 0 5px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    font-size: 0;
+    height: $outer-height;
+    line-height: $outer-height;
+    border-radius: 4px;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    > label {
         display: inline-block;
         user-select: none;
         transition: background-color .4s ease;
@@ -24,25 +31,24 @@
         i {
             display: inline-block;
             padding: 2px;
-            width: 40px;
-            height: 20px;
+            width: $inner-height * 2;
+            height: $inner-height;
             border-radius: 13px;
             vertical-align: middle;
-            transition: .25s .09s ease;
             position: relative;
             background-color: #d8d9db;
             box-sizing: initial;
-            transition: background-color .4s ease;
+            transition: .4s .09s ease;
 
             &:after {
                 content: " ";
                 display: block;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background-color: #fff;
                 position: absolute;
                 left: 2px;
+                width: $inner-height;
+                height: $inner-height;
+                border-radius: 50%;
+                background-color: #fff;
                 transition: .4s ease;
             }
         }
@@ -56,11 +62,13 @@
         }
     }
 
-    > input {
+
+    input {
         margin-left: 5px;
-        padding: 6px 8px;
+        padding: 0 8px;
         width: 50px;
-        border: 1px solid rgba(0,0,0,.15);
+        height: $inner-height;
+        border: 1px solid rgba(0, 0, 0, .15);
         border-radius: 3px;
         font-size: 14px;
         color: #24292e;
