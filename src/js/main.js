@@ -1,10 +1,12 @@
 (() => {
+    // 配置项
+    const INTERVAL = 10; // 时间间隔，单位：秒
+    const STORAGE_TYPE = 'sessionStorage'; // 使用的 storage 类型
+    const CSS_FILE_PATH = './dist/1.0.0/css/page-refresher.min.css'; // css 文件路径
+
     const INPUT_DOM_ID = 'J_PageRefresherInput';
     const CHECKBOX_DOM_ID = 'J_PageRefresherCheckbox';
 
-    const INTERVAL = 10; // 时间间隔，单位：秒
-
-    const STORAGE_TYPE = 'sessionStorage'; // 使用的 storage 类型
     const INTERVAL_HASH_KEY = 'c58dd06e8e5fc878a1a7877add6f7cb4115b123e'; // 刷新时间间隔存储键
     const IS_TURN_ON_HASH_KEY = 'a6cb5b48544e16330e24ce0154d76936b3dd68a7'; // 是否开启自动刷新存储键
 
@@ -136,16 +138,17 @@
         const isTurnOn = window[STORAGE_TYPE].getItem(IS_TURN_ON_HASH_KEY) === 'true';
 
         // 加载样式文件
-        loadCss('dist/1.0.0/css/page-refresher.min.css');
+        loadCss(CSS_FILE_PATH);
 
         // 如果未设置刷新时间
         if (interval === null) {
             window[STORAGE_TYPE].setItem(INTERVAL_HASH_KEY, INTERVAL);
         }
 
+        interval = interval || INTERVAL;
+
         // 如果定时器开启
         if (isTurnOn) {
-            interval = interval || INTERVAL;
             timer.start(interval || INTERVAL);
         }
 

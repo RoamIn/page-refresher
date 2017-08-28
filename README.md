@@ -4,126 +4,98 @@
 
 ## 目录
 
-- [Build Setup](#build-setup)
-- [在线演示](#在线演示)
-- [代码示例](#代码示例)
-- [事件](#事件)
-- [杂记](#杂记)
+- [技术选型](#技术选型)
+- [思路](#思路)
+- [配置说明](#配置说明)
+- [构建代码](#构建代码)
+- [引用说明](#引用说明)
+- [在线demo](#在线demo)
+- [注意](#注意)
+- [隐患](#隐患)
 
+## 技术选型
 
-## Build Setup
+- url 锚点参数
+    - 缺点：需要解析 url，较麻烦
 
-``` bash
-# install dependencies
-npm install
+- `sessionStorage`：
+    - 优点： 无需解析 url。存储在 `sessionStorage` 里面的数据在页面会话结束时会被清除。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。在新标签或窗口打开一个页面会初始化一个新的会话
+    - 兼容性：IE8+
 
-# serve with hot reload at localhost:8080
-npm run dev
+故选取 `sessionStorage`。
 
-# build for production with minification
-npm run build
+> 其实 `localStorage` 也行，区别在于无论页面关闭刷新与否，数据都会保存。所以可以设置配置项，配置需要的存储类型。
 
-# build for production and view the bundle analyzer report
-npm run build --report
+## 思路
+
+1. 页面初始化的时候，读取本地的 `sessionStorage` 数据 isTurnOn（是否开启自动刷新） 和 interval（刷新时间间隔，单位：秒）
+2. 判断 isTurnOn 和 interval是否存在，不存在则设置默认值
+3. 根据 isTurnOn 和 interval 生成 html 并注入页面
+4. 监听 checkbox 改变
+    - 选取，则设置 isTurnOn 为 true，并开启定时器
+    - 取消选取，则设置 isTurnOn 为 false，并关闭定时器
+5. 监听 input 改变，更新 interval
+
+## 配置说明
+
+#### 文件地址：
+
+```
+page-refresher/
+├── ...
+├── src/
+│   └── /js
+│      └── main.js
+└── ...
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+#### 配置代码：
 
-## 在线演示
+```js
+// ...
 
-在线演示: [go to live demo](http://htmlpreview.github.io/?https://github.com/ct-adc/ct-adc-custom-input/blob/master/view/demo.html).
+// 配置项
+const INTERVAL = 10; // 时间间隔，单位：秒
+const STORAGE_TYPE = 'sessionStorage'; // 使用的 storage 类型
+const CSS_FILE_PATH = 'dist/1.0.0/css/page-refresher.min.css'; // css 文件路径
 
-![demo.gif](./src/img/demo.gif)
+// ...
+```
 
-## 代码示例
+#### 参数说明
+
+参数|类型|默认值|是否必填|描述
+--- | --- | --- | --- | --- |
+INTERVAL | Int | 10 | 是 | 刷新时间间隔，单位：秒
+STORAGE_TYPE | String | 'sessionStorage' | 是 | 存储类型，只能是 `sessionStorage`、`localStorage`
+CSS_FILE_PATH | String | | 是 | css 文件地址
+
+## 构建代码
+
+命令行执行：
+
+```
+gulp
+```
+
+
+## 引用说明
+
+在页面中引入对应的 js 文件：
 
 ```html
-<number-input class="form-control"
-                              :min="setting.min"
-                              :max="setting.max"
-                              :sep="setting.sep"
-                              :step="setting.step"
-                              v-model="setting.val"></number-input>
+<script src="dist/1.0.0/js/page-refresher.min.js"></script>
 ```
 
-```javascript
-import { NumberInput } from 'cy-adc-custom-input.vue';
+## 在线demo
 
-export default {
-    components: {
-        NumberInput
-    },
-    data() {
-        return {
-            setting: {
-                min: 1,
-                max: 100000,
-                sep: ',', // default[,]
-                step: 4, // default[3]
-                val: 'awdawd12345678'
-            }
-        };
-    }
-};
-```
+请点击: [demo](http://htmlpreview.github.io/?https://github.com/RoamIn/page-refresher/blob/master/demo.html).
 
-## 事件
+## 注意
 
-- input: 每次输入[input]都触发，返回最新 value
-- change: 每次失去焦点[blur]触发，返回最新 value
-
-## 杂记
-
-#### 功能
-
-- 数值范围
-  > 设置最小值（min）和最大值（max）
-
-- 整数、浮点数、不限
-  > 设置
-
-- 正数、负数、不限
-  > 设置
-
-- 千分位逗号分隔
-  > 分割位数（step）可以设置、分隔符（sep）可以设置
+- IE的 storage 存储不支持本地测试，所以需要启个 server 测试。
 
 
+## 隐患
 
-#### 参数
-
-- min: 最小值
-- max: 最大值
-
-- sep: 千分位分隔符
-- step: 分割步长
-
-- val: 绑定的数值
-
-#### 处理步骤
-
-1. 将输入的字符 val 格式化
-  - 使用相应数字类型的正则，将 val 格式化为所需要的数字类型 num
-  - 整数非 0 开头；无小数点；无负号
-  - 浮点数小于 0 可以 0 开头，此外不能 0 开头；可以有一个小数点
-  - 正数不能出现负号（也不考虑 + 符号）
-  - 负数 - 开头，只能一个 -
-2. 判断 num 的范围
-  - 如果小于 min，则 num 为 min
-  - 如果大于 max，则 num 为 max
-  - 否则，则 num 不变
-3. emit 此时的 num
-4. 将 num 用分隔符 sep 进行分割，分割步长为 step
-  - 将数字以非数字符（负号、小数点）分割成数组
-  - 整数部分，每 step 个长度插入一个 sep
-  - 合并数组成 val
-5. 显示 val
-
-#### 问题
-
-- 如果实时限制 val 的 min、max，则无法更改第一个数字，比如 1~1000，如何输入 2
- - 可以 emit change 的时候判断校正数值范围
-
-- 如果实时格式化千分位，会导致光标位置错位（概率性出现）
-  - 同样也可以 emit change 的时候格式化（不喜欢这种方式）
-  - 在 input 的时候，使用 [selectText](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange) 将光标移至末尾
+样式可能会被原始页面的干扰导致显示异常
