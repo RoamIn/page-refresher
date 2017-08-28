@@ -78,6 +78,12 @@ CSS_FILE_PATH | String | | 是 | css 文件地址
 gulp
 ```
 
+或者:
+
+```
+npm run build
+```
+
 
 ## 引用说明
 

@@ -4,7 +4,7 @@
   "description": "Auto refresh web page",
   "main": "src/component/",
   "scripts": {
-    "build": "node build/build.js"
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
