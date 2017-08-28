@@ -1,6 +1,6 @@
 # page-refresher
 
-> Auto refresh web page
+Auto refresh web page
 
 ## 目录
 
