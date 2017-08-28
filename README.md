@@ -28,13 +28,13 @@ Auto refresh web page
 
 ## 思路
 
-1. 页面初始化的时候，读取本地的 `sessionStorage` 数据 isTurnOn（是否开启自动刷新） 和 interval（刷新时间间隔，单位：秒）
-2. 判断 isTurnOn 和 interval是否存在，不存在则设置默认值
-3. 根据 isTurnOn 和 interval 生成 html 并注入页面
-4. 监听 checkbox 改变
+1. 页面初始化的时候，读取本地的存储的数据： `isTurnOn`（是否开启自动刷新）、 `interval`（刷新时间间隔，单位：秒）
+2. 判断 `isTurnOn` 和 `interval` 是否存在，不存在则设置默认值
+3. 根据 `isTurnOn` 和 `interval` 生成 html 并注入页面
+4. 监听 checkbox 开关改变
     - 选取，则设置 isTurnOn 为 true，并开启定时器
     - 取消选取，则设置 isTurnOn 为 false，并关闭定时器
-5. 监听 input 改变，更新 interval
+5. 监听 input 时间间隔的改变，并更新 `interval`
 
 ## 配置说明
 
@@ -57,7 +57,7 @@ page-refresher/
 // 配置项
 const INTERVAL = 10; // 时间间隔，单位：秒
 const STORAGE_TYPE = 'sessionStorage'; // 使用的 storage 类型
-const CSS_FILE_PATH = 'dist/1.0.0/css/page-refresher.min.css'; // css 文件路径
+const CSS_FILE_PATH = './dist/1.0.0/css/page-refresher.min.css'; // css 文件路径
 
 // ...
 ```
@@ -66,8 +66,8 @@ const CSS_FILE_PATH = 'dist/1.0.0/css/page-refresher.min.css'; // css 文件路�
 
 参数|类型|默认值|是否必填|描述
 --- | --- | --- | --- | --- |
-INTERVAL | Int | 10 | 是 | 刷新时间间隔，单位：秒
-STORAGE_TYPE | String | 'sessionStorage' | 是 | 存储类型，只能是 `sessionStorage`、`localStorage`
+INTERVAL | Positive Integer | 10 | 是 | 刷新时间间隔，正整数，单位：秒
+STORAGE_TYPE | String | sessionStorage | 是 | 存储类型，只能是 `sessionStorage` 或者 `localStorage`
 CSS_FILE_PATH | String | | 是 | css 文件地址
 
 ## 构建代码
@@ -84,7 +84,7 @@ gulp
 在页面中引入对应的 js 文件：
 
 ```html
-<script src="dist/1.0.0/js/page-refresher.min.js"></script>
+<script src="./dist/1.0.0/js/page-refresher.min.js"></script>
 ```
 
 ## 在线demo
@@ -93,7 +93,8 @@ gulp
 
 ## 注意
 
-- IE的 storage 存储不支持本地测试，所以需要启个 server 测试。
+- IE的 storage 存储不支持本地测试，所以需要启个 server 测试
+- 现在的在线 demo 预览无效，详见 [bug#54](https://github.com/htmlpreview/htmlpreview.github.com/issues/54)
 
 
 ## 隐患

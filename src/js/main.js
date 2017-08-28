@@ -106,8 +106,12 @@
 
     // 刷新时间间隔改变事件处理
     function inputChangeEventHandler(event) {
-        const interval = event.target.value;
+        let interval = event.target.value;
 
+        interval = interval.replace(/^[0\D]*|\D*/g, ''); // 去除非数字，以及0开头
+        interval = interval === '' ? INTERVAL : interval; // 如果为空则设置默认值
+
+        event.target.value = interval;
         window[STORAGE_TYPE].setItem(INTERVAL_HASH_KEY, interval);
     }
 
