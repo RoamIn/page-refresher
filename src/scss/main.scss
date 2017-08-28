@@ -1,5 +1,5 @@
 $outer-height: 36px;
-$inner-height: 20px;
+$inner-height: 24px;
 
 .page-refresher-wrapper {
     display: block !important;
@@ -8,15 +8,27 @@ $inner-height: 20px;
     bottom: 25px;
     padding: 0 5px;
     border: 1px solid rgba(0, 0, 0, .15);
-    font-size: 0;
     height: $outer-height;
-    line-height: $outer-height;
     border-radius: 4px;
     background-color: #fff;
     box-sizing: border-box;
 
-    > label {
+    &:before {
+        content: "";
         display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    > .title,
+    > .checkbox-group,
+    > .sec-select{
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    > .checkbox-group {
         user-select: none;
         transition: background-color .4s ease;
 
@@ -31,12 +43,12 @@ $inner-height: 20px;
         i {
             display: inline-block;
             padding: 2px;
-            width: $inner-height * 2;
-            height: $inner-height;
-            border-radius: 13px;
-            vertical-align: middle;
+            width: ($inner-height - 4px) * 2;
+            height: $inner-height - 4px;
+            border-radius: ($inner-height + 4px) / 2;
             position: relative;
             background-color: #d8d9db;
+            vertical-align: middle;
             box-sizing: initial;
             transition: .4s .09s ease;
 
@@ -45,8 +57,8 @@ $inner-height: 20px;
                 display: block;
                 position: absolute;
                 left: 2px;
-                width: $inner-height;
-                height: $inner-height;
+                width: $inner-height - 4px;
+                height: $inner-height - 4px;
                 border-radius: 50%;
                 background-color: #fff;
                 transition: .4s ease;
@@ -63,23 +75,22 @@ $inner-height: 20px;
     }
 
 
-    input {
+    .sec-select {
         margin-left: 5px;
         padding: 0 8px;
-        width: 50px;
+        width: 80px;
         height: $inner-height;
         border: 1px solid rgba(0, 0, 0, .15);
         border-radius: 3px;
         font-size: 14px;
         color: #24292e;
-        vertical-align: middle;
         background-color: #fff;
         outline: none;
         transition: width .4s ease;
     }
 
     &.turn-on {
-        > input {
+        > select {
             margin-left: 0;
             padding-left: 0;
             padding-right: 0;

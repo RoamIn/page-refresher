@@ -57,7 +57,6 @@ page-refresher/
 // 配置项
 const INTERVAL = 10; // 时间间隔，单位：秒
 const STORAGE_TYPE = 'sessionStorage'; // 使用的 storage 类型
-const CSS_FILE_PATH = './dist/1.0.0/css/page-refresher.min.css'; // css 文件路径
 
 // ...
 ```
@@ -66,9 +65,9 @@ const CSS_FILE_PATH = './dist/1.0.0/css/page-refresher.min.css'; // css 文件�
 
 参数|类型|默认值|是否必填|描述
 --- | --- | --- | --- | --- |
-INTERVAL | Positive Integer | 10 | 是 | 刷新时间间隔，正整数，单位：秒
 STORAGE_TYPE | String | sessionStorage | 是 | 存储类型，只能是 `sessionStorage` 或者 `localStorage`
-CSS_FILE_PATH | String | | 是 | css 文件地址
+INTERVAL | Positive Integer | 2 | 是 | 刷新时间间隔，正整数，单位：秒
+INTERVAL_OPTION_LIST | Positive Integer | [2, 5, 10, 15] | 是 | 刷新时间间隔列表，用于生成下拉列表，正整数，单位：秒
 
 ## 构建代码
 
@@ -87,9 +86,13 @@ npm run build
 
 ## 引用说明
 
-在页面中引入对应的 js 文件：
+在页面中引入对应的 css、js 文件：
 
 ```html
+<link rel="stylesheet" href="./dist/1.0.0/css/page-refresher.min.css">
+
+...
+
 <script src="./dist/1.0.0/js/page-refresher.min.js"></script>
 ```
 

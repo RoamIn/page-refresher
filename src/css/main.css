@@ -10,14 +10,12 @@
   background-color: #fff;
   box-sizing: border-box;
 }
-
 .page-refresher-wrapper:before {
   content: "";
   display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
-
 .page-refresher-wrapper > .title,
 .page-refresher-wrapper > .checkbox-group,
 .page-refresher-wrapper > .sec-select {
@@ -25,20 +23,16 @@
   display: inline-block;
   vertical-align: middle;
 }
-
 .page-refresher-wrapper > .checkbox-group {
   user-select: none;
   transition: background-color .4s ease;
 }
-
 .page-refresher-wrapper > .checkbox-group:hover {
   cursor: pointer;
 }
-
 .page-refresher-wrapper > .checkbox-group > input {
   display: none;
 }
-
 .page-refresher-wrapper > .checkbox-group i {
   display: inline-block;
   padding: 2px;
@@ -51,7 +45,6 @@
   box-sizing: initial;
   transition: .4s .09s ease;
 }
-
 .page-refresher-wrapper > .checkbox-group i:after {
   content: " ";
   display: block;
@@ -63,15 +56,12 @@
   background-color: #fff;
   transition: .4s ease;
 }
-
 .page-refresher-wrapper > .checkbox-group > input:checked + i {
   background-color: #4bd865;
 }
-
 .page-refresher-wrapper > .checkbox-group > input:checked + i:after {
   transform: translateX(20px);
 }
-
 .page-refresher-wrapper .sec-select {
   margin-left: 5px;
   padding: 0 8px;
@@ -85,7 +75,6 @@
   outline: none;
   transition: width .4s ease;
 }
-
 .page-refresher-wrapper.turn-on > select {
   margin-left: 0;
   padding-left: 0;
@@ -93,3 +82,5 @@
   width: 0;
   border: none;
 }
+
+/*# sourceMappingURL=main.css.map */
