@@ -103,7 +103,6 @@ npm run build
 ## 注意
 
 - IE的 storage 存储不支持本地测试，所以需要启个 server 测试
-- 现在的在线 demo 预览无效，详见 [bug#54](https://github.com/htmlpreview/htmlpreview.github.com/issues/54)
 
 
 ## 隐患
